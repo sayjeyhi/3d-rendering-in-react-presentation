@@ -1,0 +1,33 @@
+{
+  "name": "r3f-threejs",
+  "private": true,
+  "scripts": {
+    "start": "vite dev --port 4020",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.96.1",
+    "@react-three/fiber": "^8.15.14",
+    "@react-three/postprocessing": "^2.15.12",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-three-fiber": "^6.0.13",
+    "spectacle": "^10.1.7",
+    "three": "^0.160.0",
+    "three-stdlib": "^2.29.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/three": "^0.160.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vitejs/plugin-react": "^2.0.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3",
+    "vite": "^3.0.7",
+    "vite-plugin-glsl": "^1.2.1"
+  }
+}
