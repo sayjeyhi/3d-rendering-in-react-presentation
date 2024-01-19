@@ -18,27 +18,28 @@ import {
   MarkdownSlideSet,
   codePaneThemes,
   FullScreen,
+  fadeTransition,
+  useSteps,
 } from 'spectacle'
 
 import { Intro } from './examples/0-intro'
 import Geometry from './examples/0-Geomertry'
+import { CameraView } from './examples/CameraView'
 
-const SlideFragments = () => (
-  <>
-    <Slide>
-      <Text>This is a slide fragment.</Text>
-    </Slide>
-    <Slide>
-      <Text>This is also a slide fragment.</Text>
+const SlideFragments = () => {
+  const step = useSteps()
+  return (
+    <>
+      <Text>This is also a slide fragment. {step.placeholder}</Text>
       <Appear>
         <Text>This item shows up!</Text>
       </Appear>
       <Appear>
         <Text>This item also shows up!</Text>
       </Appear>
-    </Slide>
-  </>
-)
+    </>
+  )
+}
 
 const theme = {
   colors: {
@@ -50,6 +51,7 @@ const theme = {
 
 const Presentation = () => (
   <Deck
+    transition={fadeTransition}
     theme={theme}
     template={({ slideNumber, numberOfSlides }) => (
       <FlexBox
@@ -94,11 +96,51 @@ const Presentation = () => (
     </Slide>
 
     <Slide>
+      <Text style={{ position: 'absolute' }} color="#fff">
+        WebGL JavaScript API for rendering interactive 2D and 3D graphics inside
+        an HTML &lt;canvas&gt; element. Browser Support WebGL is supported in
+        the following browsers:
+        <ul>
+          <li>Chrome 9+</li>
+          <li>Firefox 4+</li>
+          <li>Opera 12+</li>
+          <li>Safari 5.1+</li>
+          <li>Internet Explorer 11+</li>
+        </ul>
+      </Text>
+    </Slide>
+
+    <Slide>
+      <Text
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -70%)',
+          fontWeight: 900,
+        }}
+        color="yellow"
+      >
+        Thanks!
+      </Text>
+      <CameraView />
+    </Slide>
+
+    <Slide>
       <Geometry />
       <Text style={{ position: 'absolute' }} color="#fff">
         Geometries
       </Text>
     </Slide>
+
+    <Slide>
+      <iframe
+        style={{ height: '100%' }}
+        src="https://threejs.org"
+        frameBorder="0"
+      />
+    </Slide>
+
     <Slide>
       <Intro />
       <Text style={{ position: 'absolute' }} color="#fff">
@@ -154,7 +196,9 @@ const Presentation = () => (
           ))}
       </Grid>
     </Slide>
-    <SlideFragments />
+    <Slide>
+      <SlideFragments />
+    </Slide>
     <Slide>
       <CodePane language="jsx" theme={codePaneThemes.a11yDark}>{`
         import { createClient, Provider } from 'urql';
