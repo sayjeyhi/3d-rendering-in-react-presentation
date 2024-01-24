@@ -26,6 +26,8 @@ import { Grids } from './examples/0-Grids'
 import Desktop from './components/icons/Desktop'
 import Woah from './components/icons/Woah'
 import Lights from './components/icons/Lights'
+import Camera from './components/icons/Camera'
+import Material from './components/icons/Material'
 
 const theme = {
   colors: {
@@ -291,6 +293,17 @@ const Presentation = () => (
       />
     </Slide>
 
+    {/* Camera */}
+    <Slide>
+      <Heading>Camera</Heading>
+      <span className="text-center text-3xl">The point of users view</span>
+
+      <Camera className="mt-12" />
+    </Slide>
+    <Slide>
+      <iframe src="iframes/camera.html" frameBorder="0" height="100%" />
+    </Slide>
+
     {/* Lights */}
     <Slide>
       <Heading>Lights</Heading>
@@ -299,19 +312,48 @@ const Presentation = () => (
       <Lights className="opacity-60" />
     </Slide>
     <Slide>
+      <iframe src="iframes/lights.html" frameBorder="0" height="100%" />
+    </Slide>
+    <Slide>
+      <Heading> Three Point Lighting</Heading>
+
       <iframe
         src="iframes/lights-three-point.html"
         frameBorder="0"
         height="100%"
       />
     </Slide>
-    <Slide>
-      <iframe src="iframes/lights.html" frameBorder="0" height="100%" />
-    </Slide>
-    {/* Camera */}
-    <Slide>Camera</Slide>
+
     {/* Material */}
-    <Slide>Camera</Slide>
+    <Slide>
+      <Heading>Materials</Heading>
+      <span className="text-center text-3xl">The skin of your geometries</span>
+
+      <Material className="opacity-60 mt-24" />
+    </Slide>
+    <Slide>
+      <iframe src="iframes/material.html" frameBorder="0" height="100%" />
+    </Slide>
+
+    {/* UV */}
+    <Slide>
+      <Heading>UVs</Heading>
+      <span className="text-center text-3xl">
+        map textures onto 3D models for realistic surface rendering
+      </span>
+
+      <span className="text-2xl text-center text-white mt-12">
+        UVs in Three.js are coordinates assigned to each vertex of a 3D model,
+        defining how a 2D texture is mapped onto its surface. These coordinates
+        range from (0, 0) to (1, 1), indicating positions on the texture. By
+        specifying UVs during geometry creation and associating them with
+        textures in materials, Three.js enables precise texture mapping onto 3D
+        objects for realistic rendering.
+      </span>
+    </Slide>
+    <Slide>
+      <iframe src="iframes/UVs.html" frameBorder="0" height="100%" />
+    </Slide>
 
     {/* What can we do? */}
     <Slide>
@@ -426,38 +468,19 @@ export default function ThreeD() {
       </CodePane>
     </Slide>
 
-    {/* Materials */}
-    <Slide>
-      <Heading>Materials</Heading>
-      <span>There are many types of materials:</span>
-      <OrderedList className="[&_li]:text-white [&_li]:text-3xl">
-        <ListItem>MeshBasicMaterial</ListItem>
-        <ListItem>MeshDepthMaterial</ListItem>
-        <ListItem>MeshLambertMaterial</ListItem>
-        <ListItem>MeshMatcapMaterial</ListItem>
-        <ListItem>MeshNormalMaterial</ListItem>
-        <ListItem>MeshPhongMaterial</ListItem>
-        <ListItem>MeshPhysicalMaterial</ListItem>
-        <ListItem>MeshStandardMaterial</ListItem>
-        <ListItem>MeshToonMaterial</ListItem>
-      </OrderedList>
-    </Slide>
-
-    {/* Camera */}
-    <Slide>
-      <Heading>Cameras</Heading>
-      <Text>OrthographicCamera</Text> vs <Text>PerspectiveCamera</Text>
-      <FlexBox></FlexBox>
-    </Slide>
-
     {/* Particles */}
     <Slide>
       <Heading>Particles system</Heading>
-      <Text>Points</Text> vs <Text>Particles</Text>
-      <p>
-        <Text>Points</Text> are rendered as single pixels on the screen.
-        <Text>Particles</Text> are rendered as small textures.
-      </p>
+      <span>
+        <p className="text-4xl text-center">
+          <strong>Points</strong> vs <strong>Particles</strong>
+          <br />
+          <div className="mt-32 text-white px-32">
+            <strong>Points</strong> are rendered as single pixels on the screen.
+            <strong>Particles</strong> are rendered as small textures.
+          </div>
+        </p>
+      </span>
     </Slide>
     <Slide>
       <div className="text-5xl font-bold text-center mb-5">
@@ -480,9 +503,9 @@ export default function ThreeD() {
     {/* Shaders */}
     <Slide>
       <Heading>Shaders</Heading>
-      <p>
-        Shaders are programs that run on the GPU. They are used to calculate the
-        color of each pixel rendered on the screen.
+      <p className="text-3xl text-center text-white px-32">
+        Shaders are programs that run on the GPU. <br /> They are used to
+        calculate the color of each pixel rendered on the screen.
       </p>
     </Slide>
     <Slide>
@@ -494,6 +517,90 @@ export default function ThreeD() {
         frameBorder="0"
         height="100%"
       />
+    </Slide>
+
+    {/* Butcher */}
+    <Slide>
+      <div className="text-5xl font-bold text-center mb-5">
+        A Game we made for iO hackathon
+      </div>
+      <iframe src="http://localhost:5173/" frameBorder="0" height="100%" />
+    </Slide>
+    <Slide>
+      <Heading>Physics</Heading>
+
+      <CodePane
+        language="bash"
+        theme={codePaneThemes.a11yDark}
+      >{`npm i @react-three/rapier`}</CodePane>
+
+      <p className="text-3xl text-center text-white mt-32 px-40">
+        is a wrapper library around the Rapier WASM-based physics engine,
+        designed to slot seamlessly into a react-three/fiber pipeline.
+      </p>
+    </Slide>
+    <Slide>
+      <Heading>Animations</Heading>
+
+      <span className="text-yellow-500 text-3xl px-12 leading-10">
+        1. Create 3d model
+        <br />
+        2. Export in FBX
+        <br />
+        3. Use Maximo to create animations
+        <br />
+        4. Export in FBX and use it in r3f
+      </span>
+      <a
+        href="https://www.mixamo.com/"
+        target="_blank"
+        className="text-blue-500 text-center text-2xl mt-32"
+        rel="noreferrer"
+      >
+        https://www.mixamo.com/
+      </a>
+    </Slide>
+
+    <Slide>
+      <Heading> Resources:</Heading>
+
+      <div className="[&_a]:text-blue-500 [&_a]:text-3xl">
+        <ListItem>
+          <a
+            target="_blank"
+            href="https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene"
+            rel="noreferrer"
+          >
+            Three.js docs
+          </a>
+        </ListItem>
+        <ListItem>
+          <a target="_blank" href="https://github.com/wass08" rel="noreferrer">
+            Wassim Sammad https://github.com/wass08
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            target="_blank"
+            href="https://github.com/simondevyoutube"
+            rel="noreferrer"
+          >
+            Simon Dev https://github.com/simondevyoutube
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            target="_blank"
+            href="https://github.com/davidlyons"
+            rel="noreferrer"
+          >
+            David Lyons https://github.com/davidlyons
+          </a>
+        </ListItem>
+        <ListItem>
+          <a>...etc</a>
+        </ListItem>
+      </div>
     </Slide>
 
     {/* Thanks */}
@@ -510,7 +617,7 @@ export default function ThreeD() {
         }}
       >
         <Heading color="yellow">Thanks!</Heading>
-        <FlexBox flexDirection="column" mt="50px">
+        <FlexBox flexDirection="column" mt="40px">
           <Image
             style={{
               borderRadius: '50%',
@@ -520,10 +627,29 @@ export default function ThreeD() {
             src={'https://avatars.githubusercontent.com/u/6254009?v=4'}
             width={120}
           />
-          <Text height color="#fff" textAlign="center" fontSize={22} mt={10}>
+          <Text
+            height
+            color="#fff"
+            textAlign="center"
+            fontSize={22}
+            className="relative top-[-17px]"
+          >
             Jafar Rezaei <br />
-            <span style={{ fontSize: 14, opacity: 0.6 }}>January 2024</span>
+            <span
+              className="relative top-[-14px] font-thin"
+              style={{ fontSize: 14, opacity: 0.6 }}
+            >
+              January 2024
+            </span>
           </Text>
+          <a
+            href="https://r3f-threejs.sayjeyhi.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 text-lg font-medium -mt-2"
+          >
+            https://r3f-threejs.sayjeyhi.com/
+          </a>
         </FlexBox>
 
         <CameraView />

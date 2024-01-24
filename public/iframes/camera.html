@@ -7,7 +7,7 @@
 		<style>
 			body {
 				color: #808080;
-				font-family:Monospace;
+				font-family: Monospace;
 				font-size:13px;
 				text-align:center;
 
@@ -15,9 +15,21 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+			.info {
+				padding: 34px 0;
+				position: absolute;
+				bottom: 0;
+				font-size: 28px;
+				width: 100%;
+				background-color: #000;
+				z-index: 11;
+				color: #fff;
+			}
 		</style>
 	</head>
 	<body>
+
+		<div class='info' id='info'></div>
 
 		<script src="three/three.min.js"></script>
 		<script src="three/OrbitControls.js"></script>
@@ -269,7 +281,7 @@
 			    obj[prop] = current.property;
 			    moveFrustumVerts( currentMap );
 			  }
-			  
+
 			  var current = { property: obj[prop] };
 			  var target = { property: targetValue };
 
@@ -286,13 +298,16 @@
 			function applyStep(step) {
 			  // console.log(step);
 
+				const infoEl = document.getElementById('info');
 			  if (step == 1) {
 			  	frustum.visible = false;
+					infoEl.innerHTML = 'cam = new THREE.PerspectiveCamera( fov, aspect, near, far )';
 			  }
 			  else if (step == 2) {
 			  	moveFrustumVerts(topMap);
 			  	frustum.visible = true;
-			  }
+					infoEl.innerHTML = 'cam = new THREE.PerspectiveCamera( fov, aspect, near, far )';
+				}
 			  else if (step == 3) {
 			  	moveFrustumVerts(bottomMap);
 			  	frustum.visible = true;
@@ -300,22 +315,27 @@
 			  else if (step == 4) {
 			  	frustum.visible = false;
 			  	setupTween(cameraPerspective, 'fov', 15 );
+					infoEl.innerHTML = 'camera.fov = 15';
 			  }
 			  else if (step == 5) {
 			  	setupTween(cameraPerspective, 'fov', 65 );
-			  }
+					infoEl.innerHTML = 'camera.fov = 65';
+				}
 			  else if (step == 6) {
 			  	setupTween(cameraPerspective, 'far', 1200 );
+					infoEl.innerHTML = 'camera.far = 1200';
 			  }
 			  else if (step == 7) {
 			  	setupTween(cameraPerspective, 'far', 3000 );
-			  	
+					infoEl.innerHTML = 'camera.far = 3000';
+
 			  	activeCamera = cameraPerspective;
 			  	activeHelper = cameraPerspectiveHelper;
 			  }
 			  else if (step == 8) {
 			  	activeCamera = cameraOrtho;
 			  	activeHelper = cameraOrthoHelper;
+					infoEl.innerHTML = 'camera = new THREE.OrthographicCamera( left, right, top, bottom)';
 			  }
 			}
 
@@ -338,9 +358,9 @@
 			}
 
 			// Controls for stand-alone
-			window.addEventListener('keydown', function (e) {
-			  if (e.keyCode == 38 || e.keyCode == 37) back();
-			  if (e.keyCode == 40 || e.keyCode == 39) forward();
+			window.parent.addEventListener('keydown', function (e) {
+			  if (e.keyCode == 65 || e.keyCode == 38 || e.keyCode == 37) back();
+			  if (e.keyCode == 68 || e.keyCode == 40 || e.keyCode == 39) forward();
 
 			  if (e.keyCode == 79) {  /*O*/
 			  	activeCamera = cameraOrtho;
