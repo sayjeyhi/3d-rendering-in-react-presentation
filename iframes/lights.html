@@ -8,21 +8,35 @@
     <meta name="author" content="">
 
     <title>Three.js Lights</title>
-    
+
     <style type="text/css">
       html { overflow: hidden; }
       body { margin: 0; padding: 0; overflow: hidden; font-family: Monospace; font-size: 13px; line-height: 20px; color: #333; }
 
       a { color: #0088cc; text-decoration: none; }
       a:hover, a:focus { color: #005580; text-decoration: underline; }
+
+
+      .info {
+        padding: 34px 0;
+        position: absolute;
+        bottom: 0;
+        font-size: 28px;text-align:center;
+        width: 100%;
+        background-color: #000;
+        z-index: 11;
+        color: #fff;
+      }
     </style>
 
   </head>
 
   <body>
 
-    <div id="container"></div>
-    
+  <div class='info' id='info'></div>
+
+  <div id="container"></div>
+
     <script src="three/three.min.js"></script>
     <script src="three/OrbitControls.js"></script>
     <script src="three/WebGL.js"></script>
@@ -79,7 +93,7 @@
         dLight = new THREE.DirectionalLight( white, .8 );
         dLight.position.set( -80, 80, 80 );
         scene.add( dLight );
-        
+
         dLightHelper = new THREE.DirectionalLightHelper( dLight, 15 );
         scene.add( dLightHelper );
 
@@ -112,7 +126,7 @@
 
 
         material = new THREE.MeshPhongMaterial({ color: 0xaaaaaa, shininess: 40 });
-        
+
         var planeGeo = new THREE.PlaneBufferGeometry( 700, 700, 1, 1 );
         mesh = new THREE.Mesh( planeGeo, material );
         mesh.rotation.x = -Math.PI/2;
@@ -173,7 +187,7 @@
 
         camera.updateProjectionMatrix();
 
-        renderer.setSize( window.innerWidth, window.innerHeight );  
+        renderer.setSize( window.innerWidth, window.innerHeight );
       }
 
       function onDocumentMouseMove( event ) {
@@ -233,49 +247,61 @@
 
         tween.start();
       }
-      
+
 
       var step = 1;
 
 
       function applyStep(step) {
         // console.log(step);
-        
+
+        const infoEl = document.getElementById('info');
+
+        infoEl.innerText = 'light = new THREE.DirectionalLight( 0xdddddd, 0.8 );'
         if   (step == 1) {
 
         }
         else if (step == 2) {
           setupTween(dLight.position, 'x', -80);
+          infoEl.innerText = 'light.position.set( -80, 80, 80 );'
         }
         else if (step == 3) {
           setupTween(dLight.position, 'x', 80);
           setupTween(dLight.target.position, 'x', 0);
+          infoEl.innerText = 'light.position.x = 80;'
         }
         else if (step == 4) {
           setupTween(dLight.target.position, 'x', 160);
           setupTween(dLight.position, 'x', 80);
+
+          infoEl.innerText = 'light.target.position = 160;'
         }
         else if (step == 5) {
           setupTween(dLight.position, 'x', -80);
           setupTween(dLight.target.position, 'x', 0);
+          infoEl.innerText = 'light.position.x = -80;'
         }
         else if (step == 6) {
           setupTween(dLight.color, 'r', white.r);
           setupTween(dLight.color, 'g', white.g);
           setupTween(dLight.color, 'b', white.b);
+          infoEl.innerText = 'light = new THREE.DirectionalLight( 0xdddddd, intensity );'
         }
         else if (step == 7) {
           setupTween(dLight.color, 'r', lightBlue.r);
           setupTween(dLight.color, 'g', lightBlue.g);
           setupTween(dLight.color, 'b', lightBlue.b);
-        
+
           setupTween(dLight, 'intensity', 0.8);
+          infoEl.innerText = 'light = new THREE.DirectionalLight( 0xb4e7f2, 0.8 );'
         }
         else if (step == 8) {
           setupTween(dLight, 'intensity', 0.2);
+          infoEl.innerText = 'light = new THREE.DirectionalLight( 0xb4e7f2, 0.2 );'
         }
         else if (step == 9) {
           setupTween(dLight, 'intensity', 1.5);
+          infoEl.innerText = 'light = new THREE.DirectionalLight( 0xb4e7f2, 1.5 );'
         }
         else if (step == 10) {
           setupTween(dLight, 'intensity', 0.8);
@@ -285,6 +311,7 @@
           dLightHelper.visible = true;
           pLightHelper.visible = false;
           material.needsUpdate = true;
+          infoEl.innerText = 'light = new THREE.DirectionalLight( 0xb4e7f2, 0.8 );'
         }
         else if (step == 11) {
           dLight.visible = false;
@@ -296,6 +323,7 @@
           setupTween(pLight.position, 'x', -80);
           setupTween(pLight.position, 'y',  80);
           setupTween(pLight.position, 'z',  80);
+          infoEl.innerText = 'light = new THREE.PointLight( 0xb4e7f2, 0.8 );'
         }
         else if (step == 12) {
           setupTween(pLight.position, 'x', 50);
@@ -307,6 +335,7 @@
           pLightHelper.visible = true;
           sLightHelper.visible = false;
           material.needsUpdate = true;
+          infoEl.innerText = 'light = new THREE.PointLight( 0xb4e7f2, 0.8 );'
         }
         else if (step == 13) {
           pLight.visible = false;
@@ -314,38 +343,47 @@
           pLightHelper.visible = false;
           sLightHelper.visible = true;
           material.needsUpdate = true;
+          infoEl.innerText = 'light = new THREE.SpotLight( 0xb4e7f2, 0.8 );'
         }
         else if (step == 14) {
           setupTween(sLight, 'angle', Math.PI/9);
+          infoEl.innerText = 'light.angle = Math.PI / 9;'
         }
         else if (step == 15) {
           setupTween(sLight, 'angle', Math.PI/5); // should be no more than Math.PI/2
+          infoEl.innerText = 'light.angle = Math.PI / 5;'
         }
         else if (step == 16) {
           setupTween(sLight, 'penumbra', 0.4);
+          infoEl.innerText = 'light.penumbra = 0.4;'
         }
         else if (step == 17) {
           setupTween(sLight, 'penumbra', 0);
+          infoEl.innerText = 'light.penumbra = 0;'
         }
         else if (step == 18) {
           setupTween(sLight, 'penumbra', 0.8);
           sLightHelper.visible = true;
+          infoEl.innerText = 'light.penumbra = 0.8;'
         }
         else if (step == 19) {
           sLightHelper.visible = false;
           setupTween(ambLight.color, 'r', darkGrey.r);
           setupTween(ambLight.color, 'g', darkGrey.g);
           setupTween(ambLight.color, 'b', darkGrey.b);
+          infoEl.innerText = 'light = new THREE.AmbientLight( 0x444444 );'
         }
         else if (step == 20) {
           setupTween(ambLight.color, 'r', black.r);
           setupTween(ambLight.color, 'g', black.g);
           setupTween(ambLight.color, 'b', black.b);
+          infoEl.innerText = 'light = new THREE.AmbientLight( 0x000000 );'
         }
         else if (step == 21) {
           setupTween(ambLight.color, 'r', darkGrey.r);
           setupTween(ambLight.color, 'g', darkGrey.g);
           setupTween(ambLight.color, 'b', darkGrey.b);
+          infoEl.innerText = 'light = new THREE.AmbientLight( 0x444444 );'
         }
       }
 
@@ -368,9 +406,9 @@
       }
 
       // Controls for stand-alone
-      window.addEventListener('keydown', function (e) {
-        if (e.keyCode == 38 || e.keyCode == 37) back();
-        if (e.keyCode == 40 || e.keyCode == 39) forward();
+      window.parent.addEventListener('keydown', function (e) {
+        if (e.keyCode == 65 || e.keyCode == 38 || e.keyCode == 37) back();
+        if (e.keyCode == 68 || e.keyCode == 40 || e.keyCode == 39) forward();
       });
 
     </script>
