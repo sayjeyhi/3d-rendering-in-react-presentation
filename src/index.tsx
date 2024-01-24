@@ -560,6 +560,21 @@ export default function ThreeD() {
         https://www.mixamo.com/
       </a>
     </Slide>
+    <Slide>
+      <Heading>Theatrejs</Heading>
+
+      <span className="text-yellow-500 text-3xl px-12 leading-10">
+        Make animations easily with Theatre.js
+      </span>
+      <a
+        href="https://www.mixamo.com/"
+        target="_blank"
+        className="text-blue-500 text-center text-2xl mt-32"
+        rel="noreferrer"
+      >
+        https://www.theatrejs.com/
+      </a>
+    </Slide>
 
     <Slide>
       <Heading> Resources:</Heading>
