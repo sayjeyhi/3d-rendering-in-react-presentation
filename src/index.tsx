@@ -25,6 +25,7 @@ import Vertex from './components/icons/Vertex'
 import { Grids } from './examples/0-Grids'
 import Desktop from './components/icons/Desktop'
 import Woah from './components/icons/Woah'
+import Lights from './components/icons/Lights'
 
 const theme = {
   colors: {
@@ -177,6 +178,20 @@ const Presentation = () => (
       </FlexBox>
     </Slide>
 
+    {/* What is Geometry */}
+    <Slide>
+      <Heading>Geometry</Heading>
+      <span className="text-center text-3xl">is a broader term than Mesh</span>
+
+      <span className="text-center text-2xl text-white mt-32 px-30">
+        It encompasses the mathematical representation of spatial information.
+        <br />
+        In practical terms, when working with 3D graphics programming, you often
+        create and manipulate meshes to represent and render objects in a
+        virtual environment.
+      </span>
+    </Slide>
+
     {/* Geometries */}
     <Slide>
       <Text style={{ position: 'absolute' }} color="#fff">
@@ -275,6 +290,28 @@ const Presentation = () => (
         src="/images/blender-triangulated-faces.png"
       />
     </Slide>
+
+    {/* Lights */}
+    <Slide>
+      <Heading>Lights</Heading>
+      <span className="text-center text-3xl">allows items to be visible</span>
+
+      <Lights className="opacity-60" />
+    </Slide>
+    <Slide>
+      <iframe
+        src="iframes/lights-three-point.html"
+        frameBorder="0"
+        height="100%"
+      />
+    </Slide>
+    <Slide>
+      <iframe src="iframes/lights.html" frameBorder="0" height="100%" />
+    </Slide>
+    {/* Camera */}
+    <Slide>Camera</Slide>
+    {/* Material */}
+    <Slide>Camera</Slide>
 
     {/* What can we do? */}
     <Slide>
